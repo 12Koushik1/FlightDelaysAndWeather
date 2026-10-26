@@ -1,50 +1,39 @@
 # Flight Delays and Weather
 
-We want to see how weather conditions line up with flight delays and cancellations. We will combine flight records with weather readings for the same airports and times.
+We are looking at weather and flight delays at TYS, BNA, MEM, and CHA during 2024.
 
-## Our starting plan
+## Start here
 
-Start with Knoxville (TYS) in January 2024. Once we can match the flight and weather data, expand to Nashville (BNA), Memphis (MEM), and more months of 2024.
+Open **Prepare_Data.ipynb** and run the cells from top to bottom. It downloads missing files, shows the raw data, filters it, and saves one combined CSV.
 
-## Data
+Use `MONTHS = [1]` to try January first. Use `MONTHS = list(range(1, 13))` for the full year.
 
-Download the data using the links below. CSV and ZIP files stay on each person's computer and are excluded from Git because the flight files are too large for GitHub.
+## First-time setup
 
-**BTS flight data:** Flight dates, airports, scheduled departure times, delays, and cancellations.
+Use Python 3.10 or newer. In a terminal inside this folder:
 
-[Download January 2024 flight data (ZIP)](https://www.transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2024_1.zip)
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m jupyterlab
+```
 
-[Flight column descriptions](https://www.transtats.bts.gov/Fields.asp?QO_fu146_anzr=b0-gvzr&gnoyr_VQ=FGJ)
+On Windows, use `.venv\Scripts\activate` to activate the environment. In VS Code, select `.venv` as the notebook kernel.
 
-The downloaded CSV is in `Jan_2024_Flight_Data/`. It includes airports across the country, so we need to filter it to our airports.
+The first run needs internet access. No API keys or manual downloads are needed. A full year needs roughly 4 GB of free space. Later runs reuse the files.
 
-**NOAA weather data:** Weather observations at each airport. The files below cover 2024.
+## Where things are
 
-[Knoxville / TYS weather CSV](https://noaa-global-hourly-pds.s3.amazonaws.com/2024/72326013891.csv)
+- **Prepare_Data.ipynb**: start here.
+- **data/raw/**: original flight and weather files.
+- **data/processed/**: the combined CSV.
+- **data_helpers.py**: supporting code; you do not need to edit it to run the notebook.
+- **docs/data_notes.md**: optional cleaning details and source links.
+- **tests/**: checks for the supporting code.
 
-[Nashville / BNA weather CSV](https://noaa-global-hourly-pds.s3.amazonaws.com/2024/72327013897.csv)
+The data folder is created automatically and stays off GitHub. Each teammate downloads their own copy by running the notebook.
 
-[Memphis / MEM weather CSV](https://noaa-global-hourly-pds.s3.amazonaws.com/2024/72334013893.csv)
+Blank readings mean missing data, not zero. Rain, snow, and thunderstorm classification is still future work.
 
-[Weather data information and documentation](https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database)
-
-We saved these as `TYS_Weather.csv`, `BNA_Weather.csv`, and `MEM_Weather.csv`.
-
-## First steps
-
-1. Keep flights departing from TYS in January 2024.
-2. Prepare the matching TYS weather readings. Use the NOAA documentation to understand the weather codes and missing values.
-3. Put both datasets in the same time zone and match weather to each flight's scheduled departure time.
-4. Check for missing matches and make sure flights are not duplicated. Keep cancelled flights even if their delay is blank.
-5. Compare delays and cancellation rates under different weather conditions.
-
-Keep the original downloads unchanged and save prepared data separately. We are looking for patterns; a match between bad weather and delays does not prove why an individual flight was delayed.
-
-## Team tasks
-
-We will fill in names together:
-
-- Flight data: TBD
-- Weather data: TBD
-- Matching the data: TBD
-- Proposal and project notes: TBD
+To run the code checks: `python -m unittest discover -s tests`.
