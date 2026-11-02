@@ -5,7 +5,7 @@ These details explain the cleaning rules. You do not need them to run the notebo
 
 One row represents one scheduled departure. Flight columns retain BTS names. `Cancelled` is 1 for a cancellation; `DepDelay` is minutes, including negative values for early departures. `departure_delayed_15min` uses BTS's 15-minute indicator and stays blank for cancelled flights.
 
-Decoded weather columns are `temperature_c`, `dewpoint_c`, `wind_speed_mps`, `visibility_m`, and `ceiling_m`. Blank values mean missing or excluded, not zero. A ceiling of 22,000 m represents NOAA's unlimited-ceiling code. Columns ending `_raw` preserve codes for later inspection. Precipitation and rain/snow/thunderstorm categories still need further decoding and validation.
+Decoded weather columns are `temperature_c`, `dewpoint_c`, `wind_speed_mps`, `visibility_m`, and `ceiling_m`. Blank values mean missing or excluded, not zero. A ceiling of 22,000 m represents NOAA's unlimited-ceiling code. Columns ending `_raw` preserve codes for later inspection. Weather categories and one-hour precipitation are decoded using the rules in [weather_codes.md](weather_codes.md).
 
 `scheduled_departure_utc` uses the airport's local time zone (Eastern for TYS/CHA; Central for BNA/MEM), including daylight saving. Ambiguous or invalid local times are flagged and kept unmatched. NOAA report times are UTC. Routine and special reports are retained; daily/monthly summaries are excluded.
 

@@ -6,7 +6,7 @@ We are looking at weather and flight delays at TYS, BNA, MEM, and CHA during 202
 
 Open **Prepare_Data.ipynb** and run the cells from top to bottom. It downloads missing files, shows the raw data, filters it, and saves one combined CSV.
 
-Use `MONTHS = [1]` to try January first. Use `MONTHS = list(range(1, 13))` for the full year.
+Use `MONTHS = [1]` to try January first. Use `MONTHS = list(range(1, 13))` for the full year. The full-year CSV is saved to `data/processed/flights_weather_2024_full_year.csv`, with one row per scheduled departure.
 
 ## First-time setup
 
@@ -34,6 +34,6 @@ The first run needs internet access. No API keys or manual downloads are needed.
 
 The data folder is created automatically and stays off GitHub. Each teammate downloads their own copy by running the notebook.
 
-Blank readings mean missing data, not zero. Rain, snow, and thunderstorm classification is still future work.
+The notebook now includes reported rain, snow, fog, and other weather conditions, plus one-hour precipitation amounts. A weather report can have measurements even when its condition codes are blank. See the [weather code guide](docs/weather_codes.md) for how to read these columns.
 
 To run the code checks: `python -m unittest discover -s tests`.
