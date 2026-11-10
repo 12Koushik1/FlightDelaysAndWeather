@@ -1,0 +1,6 @@
+Origin,flights,cancelled,matched_weather_pct,condition_codes_pct,median_weather_age_min
+BNA,100220,1273,99.9,8.0,27.0
+MEM,22624,306,99.7,9.1,22.0
+TYS,16281,257,99.5,12.0,23.0
+CHA,6853,85,99.8,10.3,23.0
+All,145978,1921,99.8,8.8,27.0
